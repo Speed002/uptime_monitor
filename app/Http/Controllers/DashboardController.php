@@ -15,7 +15,7 @@ class DashboardController extends Controller
         if(!$site->exists){
             $site = $request->user()->sites()->whereDefault(true)->first() ?? $request->user()->sites()->first();
         }
-    
+
 
         return inertia()->render('Dashboard', [
             'site' => SiteResource::make($site),
