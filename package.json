@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "floating-vue": "^5.2.2",
+        "lodash.debounce": "^4.0.8",
         "vue-final-modal": "^4.5.5"
     }
 }
