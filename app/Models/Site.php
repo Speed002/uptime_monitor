@@ -36,5 +36,9 @@ class Site extends Model
         return $this->hasMany(Endpoint::class);
     }
 
+    public function url(){
+        return $this->scheme .'://'.$this->domain;
+    }
+
 
 }

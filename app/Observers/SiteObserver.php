@@ -8,13 +8,18 @@ use Illuminate\Support\Arr;
 class SiteObserver
 {
     public function creating(Site $site){
+        // parse_url breaks down the url into parts[scheme/https, host/something.com]
         $parsed = parse_url($site->domain);
         // dd($parsed); returns to use the scheme and the domain
+        // $site->scheme = Arr::get($parsed, 'scheme')
+        // $site->domain = Arr::get($parsed, 'host')
         $site->scheme = Arr::get($parsed, 'scheme');
         $site->domain = Arr::get($parsed, 'host');
+
     }
 
     public function updating(Site $site){
+        // dd(array_keys($site->getDirty()));
         if(in_array('default', array_keys($site->getDirty()))){
             // go into the current site, via the user relationship with the current user,
             // get all this current users sites, where id is not the current site->id,
