@@ -20,7 +20,12 @@ class EndpointResource extends JsonResource
             'location' => $this->location,
             'frequency_label' => EndpointFrequency::from($this->frequency)->label(),//returning the frequency label from $this->frequency
                                                 // enum::from() returns an enum value, hence appending ->label() to get the label() from it
-            'frequency_value' => EndpointFrequency::from($this->frequency)->value
+            'frequency_value' => EndpointFrequency::from($this->frequency)->value,
+            'latest_check' => CheckResource::make($this->check), //returns the latest check
+            'url' => $this->url(),
+            'site' => SiteResource::make($this->site),
+            'checks' => CheckResource::collection($this->checks)
+
         ];
     }
 }

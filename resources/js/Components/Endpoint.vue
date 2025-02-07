@@ -5,7 +5,7 @@
                 <TextInput id="location" type="text" v-model="editForm.location" class="block w-full h-9 text-sm" placeholder="eg. /Pricing"/>
             </template>
             <template v-else>
-                <Link class="text-indigo-600 hover:text-indigo-900">
+                <Link :href="route('endpoint.index', endpoint.id)" class="text-indigo-600 hover:text-indigo-900">
                     {{ endpoint.location }}
                 </Link>
             </template>
@@ -21,15 +21,18 @@
             </template>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <template>
-
+            <template v-if="endpoint.latest_check">
+                <time datetime="endpoint.latest_check.created_at.human" :title="endpoint.latest_check.created_at.human">{{ endpoint.latest_check.create_at.human }}</time>
             </template>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <template>
-                <span class="inline-flex items-center rounded-md px-2.5 py-0.5 text-sm font-medium">
-
+            <template v-if="endpoint.latest_check">
+                <span class="inline-flex items-center rounded-md px-2.5 py-0.5 text-sm font-medium" :class="{'bg-green-100 text-green-800': endpoint.latest_check.is_successful, 'bg-red-100 text-red-800':!endpoint.latest_check.is_successful}">
+                    {{ endpoint.latest_check.response_code }} {{ endpoint.latest_check.status_text }}
                 </span>
+            </template>
+            <template v-else>
+                -
             </template>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -86,6 +89,7 @@
 
     const destroyEndpoint = () => {
         if(window.confirm){
+        //router is used when we are not using a form
             router.delete(route('destroy.endpoint', props.endpoint.id))
         }
     }

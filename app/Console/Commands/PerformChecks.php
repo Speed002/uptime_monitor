@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Endpoint;
 use Illuminate\Console\Command;
+use App\Jobs\PerformEndpointCheck;
 
 class PerformChecks extends Command
 {
@@ -29,8 +30,11 @@ class PerformChecks extends Command
         //checking and counting the checks back from now or in the past
         // $endpoints = Endpoint::where('next_check', '<=', now())->count();
         // dd($endpoints); //this dd() will read in the terminal
-        $endpoints = Endpoint::where('next_check', '<=', now())->each(function(){
+        $endpoints = Endpoint::where('next_check', '<=', now())->each(function($endpoint){
             // job: this is where we are going to queue
+            // $endpoints = Endpoint::where('next_check', '<=', now())->each(function($endpoint){
+                PerformEndpointCheck::dispatch($endpoint);
+            // });
         });
         return command::SUCCESS;
     }

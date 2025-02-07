@@ -57,6 +57,7 @@ const createEndpoint = () => {
                         <TextInput id="location" type="text" class="block w-full h-9 text-sm" v-model="endPointForm.location" placeholder="e.g /pricing"/>
                         <InputError class="mt-2" :message="endPointForm.errors.location"/>
                     </div>
+                    <!-- {{ endpoints.data }} -->
                     <div>
                         <InputLabel for="location" value="Location" class="sr-only"/>
                         <select name="frequency" id="frequency" v-model="endPointForm.frequency" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm h-9 leading-none text-sm">
