@@ -24,7 +24,8 @@ class EndpointResource extends JsonResource
             'latest_check' => CheckResource::make($this->check), //returns the latest check
             'url' => $this->url(),
             'site' => SiteResource::make($this->site),
-            'checks' => CheckResource::collection($this->checks)
+            'checks' => CheckResource::collection($this->checks),
+            'uptime_percentage' => $this->uptimePercentage()
 
         ];
     }

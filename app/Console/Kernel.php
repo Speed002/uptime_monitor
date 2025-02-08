@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Spatie\ShortSchedule\Facades\ShortSchedule;
+use Spatie\ShortSchedule\ShortSchedule;
 
 class Kernel extends ConsoleKernel
 {
@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
     }
 
     protected function shortSchedule(ShortSchedule $shortSchedule){
-        $shortSchedule->command('checks:perform')->everySecond();
+        $shortSchedule->command('inspire')->everySecond();
     }
 
     /**

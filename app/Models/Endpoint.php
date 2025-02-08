@@ -34,4 +34,11 @@ class Endpoint extends Model
     public function checks(){
         return $this->hasMany(Check::class);
     }
+
+    public function uptimePercentage(){
+        if(!$this->checks->count()){
+            return null;
+        }
+        return number_format(($this->successful_checks_count / $this->checks()->count()) * 100, 2);
+    }
 }

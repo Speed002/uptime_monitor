@@ -24,6 +24,7 @@ class Check extends Model
     }
 
     public function statusText(){
+        // we are using the response class from symphony to access and map the statusText
         return Response::$statusTexts[$this->response_code] ?? 'Unknown';
     }
 }
